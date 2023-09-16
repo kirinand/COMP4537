@@ -2,7 +2,6 @@ import {
   addNoteToDOM, 
   populateDOM, 
   saveNotesToLocalStorage,
-  displayTimestamp
 } from "./utils.js"
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,7 +12,4 @@ document.addEventListener("DOMContentLoaded", () => {
   displayTimestamp()
 })
 
-setInterval(() => {
-  saveNotesToLocalStorage()
-  displayTimestamp()
-}, 2000)
+setInterval(saveNotesToLocalStorage, 2000)

@@ -31,6 +31,7 @@ export const saveNotesToLocalStorage = () => {
   })
   if (Array.isArray(notesArr))
     setLocalStorage(notesArr)
+    displayTimestamp()
 }
 
 export const setLocalStorage = (notesArr) => {
