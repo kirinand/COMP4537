@@ -2,6 +2,7 @@ import {
   addNoteToDOM, 
   populateDOM, 
   saveNotesToLocalStorage,
+  displayTimestamp
 } from "./utils.js"
 
 document.addEventListener("DOMContentLoaded", () => {
