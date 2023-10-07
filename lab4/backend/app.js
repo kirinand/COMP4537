@@ -97,4 +97,4 @@ server.on('request', (req, res) => {
 })
 
 server.listen(8080)
-console.log('Server running at http://localhost:8080/')
+console.log(`Server running at ${BASE_URL}`)

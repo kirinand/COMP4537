@@ -1,6 +1,6 @@
 import { CONSTANTS } from './constants.js'
 
-const API_URL = 'http://localhost:8080/api'
+const API_URL = 'https://kirin-4537.onrender.com/api'
 
 const storeWord = async (e) => {
   const word = e.target.word?.value?.trim()
