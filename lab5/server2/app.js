@@ -9,8 +9,8 @@ const DB_HOST = constants.DB_HOST
 
 const db = mysql.createConnection({
   host: DB_HOST,
-  user: 'root',
-  password: '',
+  user: constants.DB_USER,
+  password: constants.DB_PASSWORD,
   database: constants.DB_NAME,
   multipleStatements: true,
 })
