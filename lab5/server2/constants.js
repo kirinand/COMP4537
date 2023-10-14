@@ -4,6 +4,7 @@ export const constants = {
     NO_ENTRY_FOUND: 'No patient found',
     NO_QUERY: 'No query provided',
     SERVER: 'Internal server error',
+    QUERY_DENIED: 'Query denied',
   },
   MSG: {
     INSERT_SUCCESS: 'Successfully inserted {0} patient(s)',

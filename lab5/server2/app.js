@@ -72,7 +72,11 @@ server.on('request', (req, res) => {
           if (err) {
             console.log(err)
             res.writeHead(500, resHeader)
-            res.end(JSON.stringify({ error: constants.ERROR.QUERY }))
+            if (err.errno === 1142) {
+              res.end(JSON.stringify({ error: constants.ERROR.QUERY_DENIED }))
+            } else {
+              res.end(JSON.stringify({ error: constants.ERROR.QUERY }))
+            }
           } else if (!result || result.length === 0) {
             res.writeHead(404, resHeader)
             res.end(JSON.stringify({ error: constants.ERROR.NO_ENTRY_FOUND }))
@@ -107,7 +111,11 @@ server.on('request', (req, res) => {
             if (err) {
               console.log(err)
               res.writeHead(500, resHeader)
-              res.end(JSON.stringify({ error: constants.ERROR.QUERY }))
+              if (err.errno === 1142) {
+                res.end(JSON.stringify({ error: constants.ERROR.QUERY_DENIED }))
+              } else {
+                res.end(JSON.stringify({ error: constants.ERROR.QUERY }))
+              }
             } else{
               res.writeHead(200, resHeader)
               res.end(JSON.stringify({ message: constants.MSG.INSERT_SUCCESS.replace('{0}', result.affectedRows) }))
