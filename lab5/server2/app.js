@@ -5,10 +5,10 @@ import { constants } from './constants.js'
 
 const BASE_URL = constants.BASE_URL
 const FRONTEND_URL = constants.FRONTEND_URL
-const DB_HOST = constants.DB_HOST
 
 const db = mysql.createConnection({
-  host: DB_HOST,
+  host: constants.DB_HOST,
+  port: constants.DB_PORT,
   user: constants.DB_USER,
   password: constants.DB_PASSWORD,
   database: constants.DB_NAME,
@@ -62,7 +62,8 @@ server.on('request', (req, res) => {
 
       if (query) {
         const cnx = mysql.createConnection({
-          host: DB_HOST,
+          host: constants.DB_HOST,
+          port: constants.DB_PORT,
           user: 'getAgent',
           password: '',
           database: constants.DB_NAME,
@@ -101,7 +102,8 @@ server.on('request', (req, res) => {
         
         if (query) {
           const cnx = mysql.createConnection({
-            host: DB_HOST,
+            host: constants.DB_HOST,
+            port: constants.DB_HOST,
             user: 'postAgent',
             password: '',
             database: constants.DB_NAME,
