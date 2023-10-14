@@ -12,5 +12,5 @@ export const constants = {
   BASE_URL: process.env.BASE_URL || 'http://localhost:8080',
   FRONTEND_URL: process.env.FRONTEND_URL || 'http://127.0.0.1:5502',
   DB_HOST: process.env.DB_HOST || 'localhost',
-  DB_NAME: 'comp4537',
+  DB_NAME: process.env.DB_NAME || 'comp4537',
 }
