@@ -139,5 +139,6 @@ server.on('request', (req, res) => {
   
 })
 
-server.listen(8080)
-console.log(`Server running at ${BASE_URL}`)
+server.listen(process.env.PORT || 8080, () => {
+  console.log(`Server running at ${BASE_URL}`)
+})
