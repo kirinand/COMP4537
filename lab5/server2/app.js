@@ -23,8 +23,8 @@ db.connect((err) => {
 
   const createTableSql = "CREATE TABLE IF NOT EXISTS patient (patientid int(11) PRIMARY KEY AUTO_INCREMENT, name varchar(100) NOT NULL, dateOfBirth datetime NOT NULL) Engine=InnoDB;"
   const createUserSql = `CREATE USER IF NOT EXISTS '{0}'@'%';`
-  const grantSelectSql = `REVOKE ALL PRIVILEGES ON *.* FROM '{0}'@'%'; GRANT SELECT ON ${constants.DB_NAME}.patient TO '{0}'@'%';`
-  const grantInsertSql = `REVOKE ALL PRIVILEGES ON *.* FROM '{0}'@'%'; GRANT INSERT ON ${constants.DB_NAME}.patient TO '{0}'@'%';`
+  const grantSelectSql = `REVOKE ALL PRIVILEGES ON ${constants.DB_NAME}.* FROM '{0}'@'%'; GRANT SELECT ON ${constants.DB_NAME}.patient TO '{0}'@'%';`
+  const grantInsertSql = `REVOKE ALL PRIVILEGES ON ${constants.DB_NAME}.* FROM '{0}'@'%'; GRANT INSERT ON ${constants.DB_NAME}.patient TO '{0}'@'%';`
   db.query(createTableSql, (err) => {
     if (err) throw err
   })
