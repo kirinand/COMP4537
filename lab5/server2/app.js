@@ -21,24 +21,24 @@ db.connect((err) => {
   if (err) throw err
   console.log('Connected to database')
 
-  const createTableSql = "CREATE TABLE IF NOT EXISTS patient (patientid int(11) PRIMARY KEY AUTO_INCREMENT, name varchar(100) NOT NULL, dateOfBirth datetime NOT NULL) Engine=InnoDB;"
-  const createUserSql = `CREATE USER IF NOT EXISTS '{0}'@'${constants.DB_HOST}';`
-  const grantSelectSql = `GRANT SELECT ON ${constants.DB_NAME}.patient TO '{0}'@'${constants.DB_HOST}';`
-  const grantInsertSql = `GRANT INSERT ON ${constants.DB_NAME}.patient TO '{0}'@'${constants.DB_HOST}';`
+  // const createTableSql = "CREATE TABLE IF NOT EXISTS patient (patientid int(11) PRIMARY KEY AUTO_INCREMENT, name varchar(100) NOT NULL, dateOfBirth datetime NOT NULL) Engine=InnoDB;"
+  // const createUserSql = `CREATE USER IF NOT EXISTS '{0}'@'${constants.DB_HOST}';`
+  // const grantSelectSql = `GRANT SELECT ON ${constants.DB_NAME}.patient TO '{0}'@'${constants.DB_HOST}';`
+  // const grantInsertSql = `GRANT INSERT ON ${constants.DB_NAME}.patient TO '{0}'@'${constants.DB_HOST}';`
   db.query(createTableSql, (err) => {
     if (err) throw err
   })
-  db.query(createUserSql.replaceAll('{0}', 'getAgent') + createUserSql.replaceAll('{0}', 'postAgent'), (err) => {
-    if (err) { 
-      throw err 
-    } else {
-      db.query(grantSelectSql.replaceAll('{0}', 'getAgent') + grantInsertSql.replaceAll('{0}', 'postAgent'), (err) => {
-        if (err) {
-          console.log(err)
-        }
-      })
-    }
-  })
+  // db.query(createUserSql.replaceAll('{0}', 'getAgent') + createUserSql.replaceAll('{0}', 'postAgent'), (err) => {
+  //   if (err) { 
+  //     throw err 
+  //   } else {
+  //     db.query(grantSelectSql.replaceAll('{0}', 'getAgent') + grantInsertSql.replaceAll('{0}', 'postAgent'), (err) => {
+  //       if (err) {
+  //         console.log(err)
+  //       }
+  //     })
+  //   }
+  // })
 })
 
 server.on('request', (req, res) => {
@@ -63,15 +63,15 @@ server.on('request', (req, res) => {
       const query = url.searchParams.get('query')
 
       if (query) {
-        const cnx = mysql.createConnection({
-          host: constants.DB_HOST,
-          port: constants.DB_PORT,
-          user: 'getAgent',
-          password: '',
-          database: constants.DB_NAME,
-          multipleStatements: true,
-        })
-        cnx.query(query, (err, result) => {
+        // const cnx = mysql.createConnection({
+        //   host: constants.DB_HOST,
+        //   port: constants.DB_PORT,
+        //   user: 'getAgent',
+        //   password: '',
+        //   database: constants.DB_NAME,
+        //   multipleStatements: true,
+        // })
+        db.query(query, (err, result) => {
           if (err) {
             console.log(err)
             res.writeHead(500, resHeader)
@@ -87,7 +87,7 @@ server.on('request', (req, res) => {
             res.writeHead(200, resHeader)
             res.end(JSON.stringify({ data: result }))
           }
-          cnx.end()
+          // cnx.end()
         })
       } else {
         res.writeHead(400, resHeader)
@@ -103,15 +103,15 @@ server.on('request', (req, res) => {
         const { query } = JSON.parse(body || '{}')
         
         if (query) {
-          const cnx = mysql.createConnection({
-            host: constants.DB_HOST,
-            port: constants.DB_HOST,
-            user: 'postAgent',
-            password: '',
-            database: constants.DB_NAME,
-            multipleStatements: true,
-          })
-          cnx.query(query, (err, result) => {
+          // const cnx = mysql.createConnection({
+          //   host: constants.DB_HOST,
+          //   port: constants.DB_HOST,
+          //   user: 'postAgent',
+          //   password: '',
+          //   database: constants.DB_NAME,
+          //   multipleStatements: true,
+          // })
+          db.query(query, (err, result) => {
             if (err) {
               console.log(err)
               res.writeHead(500, resHeader)
@@ -124,7 +124,7 @@ server.on('request', (req, res) => {
               res.writeHead(200, resHeader)
               res.end(JSON.stringify({ message: constants.MSG.INSERT_SUCCESS.replace('{0}', result.affectedRows) }))
             }
-            cnx.end()
+            // cnx.end()
           })
         } else {
           res.writeHead(400, resHeader)
