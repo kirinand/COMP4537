@@ -71,24 +71,29 @@ server.on('request', (req, res) => {
         //   database: constants.DB_NAME,
         //   multipleStatements: true,
         // })
-        db.query(query, (err, result) => {
-          if (err) {
-            console.log(err)
-            res.writeHead(500, resHeader)
-            if (err.errno === 1142) {
-              res.end(JSON.stringify({ error: constants.ERROR.QUERY_DENIED }))
+        if (query.toLowerCase().startsWith('select')) {
+          db.query(query, (err, result) => {
+            if (err) {
+              console.log(err)
+              res.writeHead(500, resHeader)
+              if (err.errno === 1142) {
+                res.end(JSON.stringify({ error: constants.ERROR.QUERY_DENIED }))
+              } else {
+                res.end(JSON.stringify({ error: constants.ERROR.QUERY }))
+              }
+            } else if (!result || result.length === 0) {
+              res.writeHead(404, resHeader)
+              res.end(JSON.stringify({ error: constants.ERROR.NO_ENTRY_FOUND }))
             } else {
-              res.end(JSON.stringify({ error: constants.ERROR.QUERY }))
+              res.writeHead(200, resHeader)
+              res.end(JSON.stringify({ data: result }))
             }
-          } else if (!result || result.length === 0) {
-            res.writeHead(404, resHeader)
-            res.end(JSON.stringify({ error: constants.ERROR.NO_ENTRY_FOUND }))
-          } else {
-            res.writeHead(200, resHeader)
-            res.end(JSON.stringify({ data: result }))
-          }
-          // cnx.end()
-        })
+            // cnx.end()
+          })
+        } else {
+          res.writeHead(500, resHeader)
+          res.end(JSON.stringify({ error: constants.ERROR.QUERY_DENIED }))
+        } 
       } else {
         res.writeHead(400, resHeader)
         res.end(JSON.stringify({ error: constants.ERROR.NO_QUERY }))
@@ -111,21 +116,26 @@ server.on('request', (req, res) => {
           //   database: constants.DB_NAME,
           //   multipleStatements: true,
           // })
-          db.query(query, (err, result) => {
-            if (err) {
-              console.log(err)
-              res.writeHead(500, resHeader)
-              if (err.errno === 1142) {
-                res.end(JSON.stringify({ error: constants.ERROR.QUERY_DENIED }))
-              } else {
-                res.end(JSON.stringify({ error: constants.ERROR.QUERY }))
+          if (query.toLowerCase().startsWith('insert')) {
+            db.query(query, (err, result) => {
+              if (err) {
+                console.log(err)
+                res.writeHead(500, resHeader)
+                if (err.errno === 1142) {
+                  res.end(JSON.stringify({ error: constants.ERROR.QUERY_DENIED }))
+                } else {
+                  res.end(JSON.stringify({ error: constants.ERROR.QUERY }))
+                }
+              } else{
+                res.writeHead(200, resHeader)
+                res.end(JSON.stringify({ message: constants.MSG.INSERT_SUCCESS.replace('{0}', result.affectedRows) }))
               }
-            } else{
-              res.writeHead(200, resHeader)
-              res.end(JSON.stringify({ message: constants.MSG.INSERT_SUCCESS.replace('{0}', result.affectedRows) }))
-            }
-            // cnx.end()
-          })
+              // cnx.end()
+            })
+          } else {
+            res.writeHead(500, resHeader)
+            res.end(JSON.stringify({ error: constants.ERROR.QUERY_DENIED }))
+          }
         } else {
           res.writeHead(400, resHeader)
           res.end(JSON.stringify({ error: constants.ERROR.NO_QUERY }))
