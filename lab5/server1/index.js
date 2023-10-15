@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://kirin-4537.onrender.com/api'
+const BACKEND_URL = 'https://jellyfish-app-dt54y.ondigitalocean.app'
 
 const REQ_FAIL_MSG = 'Request failed'
 const INVALID_DATA_MSG = 'Invalid data from server'
