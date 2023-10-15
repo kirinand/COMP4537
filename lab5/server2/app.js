@@ -33,7 +33,9 @@ db.connect((err) => {
       throw err 
     } else {
       db.query(grantSelectSql.replaceAll('{0}', 'getAgent') + grantInsertSql.replaceAll('{0}', 'postAgent'), (err) => {
-        if (err) throw err
+        if (err) {
+          console.log(err)
+        }
       })
     }
   })
