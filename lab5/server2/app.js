@@ -21,7 +21,7 @@ db.connect((err) => {
   if (err) throw err
   console.log('Connected to database')
 
-  // const createTableSql = "CREATE TABLE IF NOT EXISTS patient (patientid int(11) PRIMARY KEY AUTO_INCREMENT, name varchar(100) NOT NULL, dateOfBirth datetime NOT NULL) Engine=InnoDB;"
+  const createTableSql = "CREATE TABLE IF NOT EXISTS patient (patientid int(11) PRIMARY KEY AUTO_INCREMENT, name varchar(100) NOT NULL, dateOfBirth datetime NOT NULL) Engine=InnoDB;"
   // const createUserSql = `CREATE USER IF NOT EXISTS '{0}'@'${constants.DB_HOST}';`
   // const grantSelectSql = `GRANT SELECT ON ${constants.DB_NAME}.patient TO '{0}'@'${constants.DB_HOST}';`
   // const grantInsertSql = `GRANT INSERT ON ${constants.DB_NAME}.patient TO '{0}'@'${constants.DB_HOST}';`
