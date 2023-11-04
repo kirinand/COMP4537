@@ -126,9 +126,6 @@ const onStoreSubmit = async (e) => {
         if (!wordLanguage || !definitionLanguage) {
           displayMessage(constants.SELECT_LANG_MSG)
           return
-        } else if (wordLanguage === definitionLanguage) {
-          displayMessage(constants.SELECT_DIFF_LANG_MSG)
-          return
         }
 
         storeWord(word, definition, wordLanguage, definitionLanguage)
