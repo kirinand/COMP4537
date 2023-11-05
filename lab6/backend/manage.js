@@ -11,7 +11,7 @@ db.query(queries.createLanguageTable, (err) => {
   
   all_languages.forEach((language) => {
     db.query(queries.insertLanguage, [language.code, language.name], (err) => {
-      if (err) throw err
+      if (err) console.log(err)
     })
   })
 })
