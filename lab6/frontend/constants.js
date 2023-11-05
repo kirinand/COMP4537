@@ -7,5 +7,5 @@ export const constants = {
 }
 
 export const config = {
-  API_URL: process.env.API_URL || 'http://localhost:8080/api',
+  API_URL: 'https://goldfish-app-a62aj.ondigitalocean.app',
 }
