@@ -5,8 +5,10 @@ import db from './database.js'
 import constants from './constants.js'
 import queries from './queries.js'
 import { getTotalEntries } from './utils.js'
+import { initDB } from './manage.js'
 
 config()
+initDB()
 const app = express()
 
 app.use(express.json())
