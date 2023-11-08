@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Login Page</title>
 <script>
+API_URL = 'https://four537.onrender.com'
 document.addEventListener('DOMContentLoaded', function() {
   const loginForm = document.getElementById('loginForm');
   const logoutLabel = document.getElementById('logoutLabel');
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     };
-    xhr.open('POST', 'http://localhost:3000/login', true);
+    xhr.open('POST', `${API_URL}/login`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({ username, password }));
   };
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         alert(xhr.responseText);
       }
     };
-    xhr.open('GET', 'http://localhost:3000/something', true);
+    xhr.open('GET', `${API_URL}/something`, true);
     xhr.send();
   };
   // Initial setup: hide the logout label and ensure 
