@@ -32,7 +32,7 @@
       isFormValid: false,
       emailRules: [
         value => !!value || constants.msg.EmailVal,
-        // value => /.+@.+\..+/.test(value) || constants.msg.EmailVal,
+        value => /.+@.+\..+/.test(value) || constants.msg.EmailVal,
       ],
       passwordRules: [
         value => !!value || constants.msg.PasswordVal,
