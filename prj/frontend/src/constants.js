@@ -2,15 +2,21 @@ const constants = {
   AppName: 'App',
   Login: 'Login',
   Register: 'Register',
-  Email: 'Email',
+  Signup: 'Signup',
+  Username: 'Username',
   Password: 'Password',
   ForgotPassword: 'Forgot password?',
   AlreadyHaveAcc: 'Already have an account? Login',
   DoNotHaveAcc: "Don't have an account? Register",
   msg: {
-    EmailVal: 'You must enter a valid email address',
+    UsernameVal: 'You must enter a valid username',
     PasswordVal: 'You must enter a password',
     PasswordMinVal: 'Password must be at least 8 characters',
+    RegisterSuccess: 'Account created successfully',
+    RegisterFail: 'Registration failed',
+  },
+  action: {
+    Close: 'CLOSE',
   }
 }
 

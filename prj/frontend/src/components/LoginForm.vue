@@ -2,10 +2,9 @@
   <v-sheet width="300" class="mx-auto" align-center>
     <v-form v-model="isFormValid" @submit.prevent="submitForm">
       <v-text-field
-        v-model="email"
-        :rules="emailRules"
-        :label="constants.Email"
-        type="email"
+        v-model="username"
+        :rules="usernameRules"
+        :label="constants.Username"
         required
       ></v-text-field>
       <v-text-field
@@ -25,16 +24,16 @@
 <script>
   import constants from '@/constants'
   import { useAppStore } from '@/store/app'
+import axios from 'axios'
 
   export default {
     data: () => ({
       constants,
-      email: '',
+      username: '',
       password: '',
       isFormValid: false,
-      emailRules: [
-        value => !!value || constants.msg.EmailVal,
-        value => /.+@.+\..+/.test(value) || constants.msg.EmailVal,
+      usernameRules: [
+        value => !!value || constants.msg.UsernameVal,
       ],
       passwordRules: [
         value => !!value || constants.msg.PasswordVal,
@@ -44,8 +43,20 @@
     methods: {
       async submitForm() {
         if (this.isFormValid) {
-          useAppStore().setLoggedIn(true)
-          this.$router.push('/')
+          axios.post(`${API_URL}/login`, {
+            username: this.username,
+            password: this.password
+          }, { withCredentials: true })
+          .then(response => {
+            useAppStore().setLoggedIn(true)
+            this.$root.vtoast.show(constants.msg.LoginSuccess)
+            this.$router.push('/')
+            console.log(response.data)
+          })
+          .catch(error => {
+            this.$root.vtoast.show(constants.msg.LoginFail)
+            console.log(error)
+          })
         }
       }
     } 
