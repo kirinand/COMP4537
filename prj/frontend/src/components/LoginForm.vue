@@ -51,7 +51,6 @@
           .then(response => {
             const { role } = response.data
             setUser({ isLoggedIn: true, isAdmin: role === 'admin' })
-            this.$root.vtoast.show(constants.msg.LoginSuccess)
             this.$router.push('/')
             console.log(response.data)
           })
