@@ -1,6 +1,6 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
-import { useAppStore } from '@/store/app'
+import { getUser } from '@/store/utils'
 
 const routes = [
   {
@@ -38,7 +38,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, _, next) => {
-  if (to.meta.requiresAuth && !useAppStore().isLoggedIn) {
+  if (to.meta.requiresAuth && !getUser().isLoggedIn) {
     next('/login')
   } else {
     next()

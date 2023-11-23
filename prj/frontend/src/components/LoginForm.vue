@@ -23,7 +23,7 @@
 
 <script>
   import constants from '@/constants'
-  import { useAppStore } from '@/store/app'
+  import { setUser } from '@/store/utils'
   import { API_URL } from '@/config'
   import axios from 'axios'
 
@@ -49,7 +49,8 @@
             password: this.password
           }, { withCredentials: true })
           .then(response => {
-            useAppStore().setLoggedIn(true)
+            const { role } = response.data
+            setUser({ isLoggedIn: true, isAdmin: role === 'admin' })
             this.$root.vtoast.show(constants.msg.LoginSuccess)
             this.$router.push('/')
             console.log(response.data)

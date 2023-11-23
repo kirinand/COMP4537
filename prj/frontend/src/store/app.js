@@ -3,11 +3,18 @@ import { defineStore } from 'pinia'
 
 export const useAppStore = defineStore('app', {
   state: () => ({
-    isLoggedIn: false,
+    user: {
+      isLoggedIn: false,
+      isAdmin: false,
+    }
   }),
   actions: {
-    setLoggedIn(value) {
-      this.isLoggedIn = value
+    setUser(value) {
+      this.user = {
+        ...this.user,
+        ...value,
+      }
     },
+
   },
 })

@@ -14,6 +14,7 @@ const constants = {
     PasswordMinVal: 'Password must be at least 8 characters',
     RegisterSuccess: 'Account created successfully',
     RegisterFail: 'Registration failed',
+    LoginFail: 'Login failed',
   },
   action: {
     Close: 'CLOSE',
