@@ -49,7 +49,7 @@
           })
           .then(response => {
             this.$root.vtoast.show(constants.msg.RegisterSuccess)
-            this.$router.push('/Login')
+            this.$router.push('/login')
             console.log(response.data)
           })
           .catch(error => {
