@@ -24,7 +24,8 @@
 <script>
   import constants from '@/constants'
   import { useAppStore } from '@/store/app'
-import axios from 'axios'
+  import { API_URL } from '@/config'
+  import axios from 'axios'
 
   export default {
     data: () => ({
