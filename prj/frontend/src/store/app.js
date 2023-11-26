@@ -15,6 +15,5 @@ export const useAppStore = defineStore('app', {
         ...value,
       }
     },
-
   },
 })

@@ -1,15 +1,10 @@
 <template>
-  HOME
-  <v-btn
-    v-if="isAdmin"
-    @click="console.log('admin')"
-  >
-    Admin Console
-  </v-btn>
+  <ImageUpload />
 </template>
 
 <script setup>
-  import { getUser } from '@/store/utils'
+  import { useAppStore } from '@/store/app'
+  import ImageUpload from '@/components/ImageUpload.vue'
 
-  const { isAdmin } = getUser()
+
 </script>

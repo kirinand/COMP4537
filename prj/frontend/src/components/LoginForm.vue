@@ -50,8 +50,13 @@
           }, { withCredentials: true })
           .then(response => {
             const { role } = response.data
-            setUser({ isLoggedIn: true, isAdmin: role === 'admin' })
-            this.$router.push('/')
+            const isAdmin = role === 'admin'
+            setUser({ isLoggedIn: true, isAdmin })
+            if (isAdmin) {
+              this.$router.push('/admin')
+            } else {
+              this.$router.push('/')
+            }
             console.log(response.data)
           })
           .catch(error => {

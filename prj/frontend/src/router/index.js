@@ -1,6 +1,6 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
-import { getUser } from '@/store/utils'
+import { useAppStore } from '@/store/app'
 
 const routes = [
   {
@@ -27,6 +27,19 @@ const routes = [
         name: 'Register',
         component: () => import('@/views/Auth.vue'),
         props: { isLogin: false },
+      },
+      {
+        path: 'admin',
+        name: 'Admin',
+        component: () => import('@/views/Admin.vue'),
+        meta: { requiresAuth: true },
+        beforeEnter: (_to, _, next) => {
+          if (useAppStore().user.isAdmin) {
+            next()
+          } else {
+            next(false)
+          }
+        },
       }
     ],
   },
@@ -38,7 +51,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, _, next) => {
-  if (to.meta.requiresAuth && !getUser().isLoggedIn) {
+  if (to.meta.requiresAuth && !useAppStore().user.isLoggedIn) {
     next('/login')
   } else {
     next()
