@@ -45,6 +45,32 @@
   import Spinner from '@/components/Spinner.vue'
   import axios from 'axios'
 
+  const endpointHeaders = [
+    {
+      key: 'Method',
+      title: constants.Method,
+    },
+    {
+      key: 'Endpoint',
+      title: constants.Endpoint,
+    },
+    {
+      key: 'Requests',
+      title: constants.NumRequests,
+    },
+  ]
+
+  const userHeaders = [
+    {
+      key: 'email',
+      title: constants.Email,
+    },
+    {
+      key: 'calls_made',
+      title: constants.TotalNumRequests,
+    },
+  ]
+
   export default {
     components: {
       Table,
