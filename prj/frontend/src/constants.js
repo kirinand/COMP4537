@@ -21,6 +21,7 @@ const constants = {
   Endpoint: 'Endpoint',
   NumRequests: 'Number of Requests',
   TotalNumRequests: 'Total Number of Requests',
+  NumAPICalls: 'Number of API Calls: {0}',
   msg: {
     UsernameVal: 'You must enter a valid username',
     PasswordVal: 'You must enter a password',

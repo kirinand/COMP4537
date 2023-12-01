@@ -46,27 +46,29 @@
     methods: {
       async submitForm() {
         if (this.isFormValid) {
-          axios.post(`${API_URL}/login`, {
-            email: this.email,
-            password: this.password
-          }, { withCredentials: true })
-          .then(response => {
-            const { role, calls_made } = response.data
-            // const role = 'admin'
-            // const calls_made = 0
+          // axios.post(`${API_URL}/login`, {
+          //   email: this.email,
+          //   password: this.password
+          // }, { withCredentials: true })
+          // .then(response => {
+          //   const data = response.data
+            const role = 'admin'
+            const calls_made = 0
             const isAdmin = role === 'admin'
-            setUser({ isLoggedIn: true, isAdmin, calls_made })
+            const warning = 'sss'
+            const data = { role, calls_made, warning, isAdmin }
+            setUser({ isLoggedIn: true, ...data })
             if (isAdmin) {
               this.$router.push('/admin')
             } else {
               this.$router.push('/')
             }
-            console.log(response.data)
-          })
-          .catch(error => {
-            this.$root.vtoast.show(constants.msg.LoginFail)
-            console.log(error)
-          })
+          //   console.log(response.data)
+          // })
+          // .catch(error => {
+          //   this.$root.vtoast.show(constants.msg.LoginFail)
+          //   console.log(error)
+          // })
         }
       }
     } 

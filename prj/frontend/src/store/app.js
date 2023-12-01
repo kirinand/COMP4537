@@ -6,7 +6,8 @@ export const useAppStore = defineStore('app', {
     user: {
       isLoggedIn: false,
       isAdmin: false,
-      calls_made: 0,
+      callsMade: 0,
+      warning: null,
     }
   }),
   actions: {

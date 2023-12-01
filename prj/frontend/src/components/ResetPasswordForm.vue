@@ -54,6 +54,7 @@
       if (!token) {
         this.$router.push('/login')
       }
+      this.token = token
     }
   }
 </script>
