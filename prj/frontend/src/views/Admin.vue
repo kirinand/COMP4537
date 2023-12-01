@@ -7,7 +7,7 @@
       <v-tab :value="0">{{ constants.Endpoint }}</v-tab>
       <v-tab :value="1">{{ constants.User }}</v-tab>
     </v-tabs>
-    <Spinner v-if="(tab === 0 && endpoint.loading) || (tab === 1 && user.loading)"></Spinner>
+    <Spinner v-if="(tab === '0' && endpoint.loading) || (tab === '1' && user.loading)"></Spinner>
     <v-window v-else v-model="tab">
       <v-window-item
         key="0"
@@ -79,7 +79,7 @@
     },
     data: () => ({
       constants,
-      tab: null,
+      tab: "0",
       endpoint: {
         headers: endpointHeaders,
         items: [],

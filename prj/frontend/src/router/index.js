@@ -35,7 +35,7 @@ const routes = [
         props: { type: 'forgot' },
       },
       {
-        path: 'reset-password',
+        path: 'reset_password',
         name: 'ResetPassword',
         component: () => import('@/views/Auth.vue'),
         props: { type: 'reset' },
