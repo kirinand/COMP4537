@@ -40,10 +40,11 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import constants from '@/constants'
   import Table from '@/components/Table.vue'
   import Spinner from '@/components/Spinner.vue'
-  import axios from 'axios'
+  import { API_URL } from '@/config'
 
   const endpointHeaders = [
     {
