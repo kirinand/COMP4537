@@ -89,40 +89,42 @@
         items: [],
         loading: false,
       },
-      methods: {
-        async getEndpointData() {
-          axios.get(`${API_URL}/stats`,
-            { withCredentials: true }
-          )
-            .then(response => {
-              const { stats } = response.data
-              this.endpoint.items = stats
-              this.endpoint.loading = false
-            })
-            .catch(error => {
-              console.log(error)
-            })
-        },
-        async getUserData() {
-          axios.get(`${API_URL}/consumption`,
-            { withCredentials: true }
-          )
-            .then(response => {
-              const { consumption } = response.data
-              this.user.items = consumption
-              this.user.loading = false
-            })
-            .catch(error => {
-              console.log(error)
-            })
-        },
-      },
-      mounted() {
-        this.endpoint.loading = true
-        this.user.loading = true
-        this.getEndpointData()
-        this.getUserData()
-      }
     }),
+
+    methods: {
+      async getEndpointData() {
+        this.endpoint.loading = true
+        axios.get(`${API_URL}/stats`,
+          { withCredentials: true }
+        )
+          .then(response => {
+            const { stats } = response.data
+            this.endpoint.items = stats
+            this.endpoint.loading = false
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+      async getUserData() {
+        this.user.loading = true
+        axios.get(`${API_URL}/consumption`,
+          { withCredentials: true }
+        )
+          .then(response => {
+            const { consumption } = response.data
+            this.user.items = consumption
+            this.user.loading = false
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+    },
+
+    mounted() {
+      this.getEndpointData()
+      this.getUserData()
+    }
   }
 </script>
