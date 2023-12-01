@@ -17,6 +17,10 @@ const constants = {
   RequestPswdReset: 'Request Password Reset',
   ResetPassword: 'Reset Password',
   User: 'User',
+  Method: 'Method',
+  Endpoint: 'Endpoint',
+  NumRequests: 'Number of Requests',
+  TotalNumRequests: 'Total Number of Requests',
   msg: {
     UsernameVal: 'You must enter a valid username',
     PasswordVal: 'You must enter a password',

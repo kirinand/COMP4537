@@ -6,7 +6,7 @@
       </router-link>
     </v-app-bar-title>
     <v-btn
-      v-if="user.isAdmin"
+      v-if="user.isLoggedIn && user.isAdmin"
     >
       <router-link to="/admin" class="router-link">
         {{ constants.AdminConsole }}

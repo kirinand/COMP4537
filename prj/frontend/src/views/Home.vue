@@ -6,5 +6,5 @@
   import { useAppStore } from '@/store/app'
   import ImageUpload from '@/components/ImageUpload.vue'
 
-
+  
 </script>

@@ -7,7 +7,8 @@
       <v-tab :value="0">{{ constants.Endpoint }}</v-tab>
       <v-tab :value="1">{{ constants.User }}</v-tab>
     </v-tabs>
-    <v-window v-model="tab">
+    <Spinner v-if="(tab === 0 && endpoint.loading) || (tab === 1 && user.loading)"></Spinner>
+    <v-window v-else v-model="tab">
       <v-window-item
         key="0"
         value="0"
@@ -41,22 +42,61 @@
 <script>
   import constants from '@/constants'
   import Table from '@/components/Table.vue'
+  import Spinner from '@/components/Spinner.vue'
+  import axios from 'axios'
 
   export default {
     components: {
-      Table
+      Table,
+      Spinner,
     },
     data: () => ({
       constants,
       tab: null,
       endpoint: {
-        headers: ['Method', 'Endpoint', '# of Requests'],
+        headers: [constants.Method, constants.Endpoint, constants.NumRequests],
         items: [],
+        loading: true,
       },
       user: {
-        headers: ['Username', 'Email', 'Token', 'Total # Requests'],
+        headers: [constants.Email, constants.TotalNumRequests],
         items: [],
+        loading: false,
       },
+      methods: {
+        async getEndpointData() {
+          axios.get(`${API_URL}/stats`,
+            { withCredentials: true }
+          )
+            .then(response => {
+              const { stats } = response.data
+              this.endpoint.items = stats
+              this.endpoint.loading = false
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        },
+        async getUserData() {
+          axios.get(`${API_URL}/consumption`,
+            { withCredentials: true }
+          )
+            .then(response => {
+              const { consumption } = response.data
+              this.user.items = consumption
+              this.user.loading = false
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        },
+      },
+      mounted() {
+        this.endpoint.loading = true
+        this.user.loading = true
+        this.getEndpointData()
+        this.getUserData()
+      }
     }),
   }
 </script>

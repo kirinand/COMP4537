@@ -38,7 +38,7 @@ const routes = [
         path: 'reset-password',
         name: 'ResetPassword',
         component: () => import('@/views/Auth.vue'),
-        props: { typr: 'reset' },
+        props: { type: 'reset' },
       },
       {
         path: 'admin',

@@ -21,9 +21,9 @@
   export default {
     data: () => ({
       constants,
-      username: '',
       password: '',
       isFormValid: false,
+      token: '',
       passwordRules: [
         value => !!value || constants.msg.PasswordVal,
       ]
@@ -32,22 +32,29 @@
     methods: {
       async submitForm() {
         if (this.isFormValid) {
-          // axios.post(`${API_URL}/register`, {
-          //   username: this.username,
-          //   password: this.password
-          // })
-          // .then(response => {
+          axios.post(`${API_URL}/reset_password`, {
+            token: this.token,
+            password: this.password
+          })
+          .then(response => {
             this.$root.vtoast.show(constants.msg.ResetPswdReqSuccess)
             this.$router.push('/login')
-          //   console.log(response.data)
-          // })
-          // .catch(error => {
-          //   this.$root.vtoast.show(constants.msg.RegisterFail, constants.action.Close)
-          //   console.log(error)
-          // })
+            console.log(response.data)
+          })
+          .catch(error => {
+            this.$root.vtoast.show(constants.msg.RegisterFail, constants.action.Close)
+            console.log(error)
+          })
         }
       }
-    } 
+    },
+
+    mounted() {
+      const { token } = this.$route.query
+      if (!token) {
+        this.$router.push('/login')
+      }
+    }
   }
 </script>
 

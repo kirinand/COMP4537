@@ -2,9 +2,10 @@
   <v-sheet width="300" class="mx-auto">
     <v-form v-model="isFormValid" @submit.prevent="submitForm">
       <v-text-field
-        v-model="username"
-        :rules="usernameRules"
-        :label="constants.Username"
+        v-model="email"
+        :rules="emailRules"
+        :label="constants.Email"
+        type="email"
         required
       ></v-text-field>
       <v-text-field
