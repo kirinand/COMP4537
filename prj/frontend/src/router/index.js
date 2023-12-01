@@ -20,13 +20,25 @@ const routes = [
         path: 'login',
         name: 'Login',
         component: () => import('@/views/Auth.vue'),
-        props: { isLogin: true },
+        props: { type: 'login' },
       },
       {
         path: 'register',
         name: 'Register',
         component: () => import('@/views/Auth.vue'),
-        props: { isLogin: false },
+        props: { type: 'register' },
+      },
+      {
+        path: 'forgot-password',
+        name: 'ForgotPassword',
+        component: () => import('@/views/Auth.vue'),
+        props: { type: 'forgot' },
+      },
+      {
+        path: 'reset-password',
+        name: 'ResetPassword',
+        component: () => import('@/views/Auth.vue'),
+        props: { typr: 'reset' },
       },
       {
         path: 'admin',

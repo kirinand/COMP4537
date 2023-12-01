@@ -8,21 +8,12 @@
         required
       ></v-text-field>
       <v-text-field
-        v-model="email"
-        :rules="emailRules"
-        :label="constants.Email"
-        type="email"
+        v-model="username"
+        :rules="usernameRules"
+        :label="constants.Username"
         required
       ></v-text-field>
-      <v-text-field
-        v-model="password"
-        :rules="passwordRules"
-        :label="constants.Password"
-        type="password"
-        required
-      ></v-text-field>
-      <v-btn type="submit" block class="mt-2">{{ constants.Signup }}</v-btn>
-      <RouterLink to="/Login" class="text-btn">{{ constants.AlreadyHaveAcc }}</RouterLink>  
+      <v-btn type="submit" block class="mt-2">{{ constants.RequestPswdReset }}</v-btn>
     </v-form>
   </v-sheet>
 </template>
@@ -36,7 +27,6 @@
     data: () => ({
       constants,
       username: '',
-      password: '',
       email: '',
       isFormValid: false,
       usernameRules: [
@@ -46,26 +36,22 @@
         value => !!value || constants.msg.EmailVal,
         value => /.+@.+\..+/.test(value) || constants.msg.EmailVal,
       ],
-      passwordRules: [
-        value => !!value || constants.msg.PasswordVal,
-      ]
     }),
 
     methods: {
       async submitForm() {
         if (this.isFormValid) {
-          axios.post(`${API_URL}/register`, {
+          axios.post(`${API_URL}/forgot_password`, {
             username: this.username,
-            email: this.email,
-            password: this.password
+            email: this.email
           })
           .then(response => {
-            this.$root.vtoast.show(constants.msg.RegisterSuccess)
+            this.$root.vtoast.show(constants.msg.ResetPswdReqSuccess.replace('{0}', this.email), constants.action.Close)
             this.$router.push('/login')
             console.log(response.data)
           })
           .catch(error => {
-            this.$root.vtoast.show(constants.msg.RegisterFail, constants.action.Close)
+            this.$root.vtoast.show(constants.msg.ResetPswdReqFail, constants.action.Close)
             console.log(error)
           })
         }

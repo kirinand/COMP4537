@@ -2,9 +2,10 @@
   <v-sheet width="300" class="mx-auto" align-center>
     <v-form v-model="isFormValid" @submit.prevent="submitForm">
       <v-text-field
-        v-model="username"
-        :rules="usernameRules"
-        :label="constants.Username"
+        v-model="email"
+        :rules="emailRules"
+        :label="constants.Email"
+        type="email"
         required
       ></v-text-field>
       <v-text-field
@@ -14,9 +15,9 @@
         type="password"
         required
       ></v-text-field>
-      <a href="">{{ constants.ForgotPassword }}</a>
+      <RouterLink to="/forgot-password" class="text-btn">{{ constants.ForgotPassword }}</RouterLink>
       <v-btn type="submit" block class="mt-2">{{ constants.Login }}</v-btn>
-      <RouterLink to="/register">{{ constants.DoNotHaveAcc }}</RouterLink>  
+      <RouterLink to="/register" class="text-btn">{{ constants.DoNotHaveAcc }}</RouterLink>  
     </v-form>
   </v-sheet>
 </template>
@@ -30,11 +31,12 @@
   export default {
     data: () => ({
       constants,
-      username: '',
+      email: '',
       password: '',
       isFormValid: false,
-      usernameRules: [
-        value => !!value || constants.msg.UsernameVal,
+      emailRules: [
+        value => !!value || constants.msg.EmailVal,
+        value => /.+@.+\..+/.test(value) || constants.msg.EmailVal,
       ],
       passwordRules: [
         value => !!value || constants.msg.PasswordVal,
@@ -45,7 +47,7 @@
       async submitForm() {
         if (this.isFormValid) {
           axios.post(`${API_URL}/login`, {
-            username: this.username,
+            email: this.email,
             password: this.password
           }, { withCredentials: true })
           .then(response => {
@@ -68,3 +70,7 @@
     } 
   }
 </script>
+
+<style scoped>
+  @import '@/styles/styles.scss';
+</style>

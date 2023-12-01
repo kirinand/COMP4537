@@ -1,11 +1,12 @@
 const constants = {
-  AppName: 'App',
+  AppName: 'SCRIBBBBLE',
   Login: 'Login',
   Register: 'Register',
   Signup: 'Signup',
   Logout: 'Logout',
   Username: 'Username',
   Password: 'Password',
+  Email: 'Email',
   ForgotPassword: 'Forgot password?',
   AlreadyHaveAcc: 'Already have an account? Login',
   DoNotHaveAcc: "Don't have an account? Register",
@@ -13,6 +14,8 @@ const constants = {
   AdminConsole: 'Admin Console',
   Analyse: 'Analyse',
   Endpoint: 'Endpoint',
+  RequestPswdReset: 'Request Password Reset',
+  ResetPassword: 'Reset Password',
   User: 'User',
   msg: {
     UsernameVal: 'You must enter a valid username',
@@ -21,6 +24,10 @@ const constants = {
     RegisterSuccess: 'Account created successfully',
     RegisterFail: 'Registration failed',
     LoginFail: 'Login failed',
+    ResetPswdReqSuccess: 'A password reset link has been sent to {0}',
+    ResetPswdReqFail: 'Failed to send reset password request',
+    ResetPswdSuccess: 'Password reset successfully',
+    ResetPswdFail: 'Failed to reset password',
   },
   action: {
     Close: 'CLOSE',
