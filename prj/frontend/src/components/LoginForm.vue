@@ -52,6 +52,8 @@
           }, { withCredentials: true })
           .then(response => {
             const { role, calls_made } = response.data
+            // const role = 'admin'
+            // const calls_made = 0
             const isAdmin = role === 'admin'
             setUser({ isLoggedIn: true, isAdmin, calls_made })
             if (isAdmin) {

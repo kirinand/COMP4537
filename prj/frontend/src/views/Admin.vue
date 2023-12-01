@@ -30,7 +30,7 @@
           <v-col>
             <Table
               :headers="user.headers"
-              :itens="user.items"
+              :items="user.items"
             ></Table>
           </v-col>
         </v-container>
@@ -80,12 +80,12 @@
       constants,
       tab: null,
       endpoint: {
-        headers: [constants.Method, constants.Endpoint, constants.NumRequests],
+        headers: endpointHeaders,
         items: [],
-        loading: true,
+        loading: false,
       },
       user: {
-        headers: [constants.Email, constants.TotalNumRequests],
+        headers: userHeaders,
         items: [],
         loading: false,
       },
