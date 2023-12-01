@@ -16,12 +16,6 @@
         :src="imageUrl"
       ></v-img>
     </v-col>
-    <v-col class="d-flex justify-end">
-      <v-btn
-        v-if="imageUrl"
-        :src="imageUrl"
-      >{{ constants.Analyse }}</v-btn>
-    </v-col>
   </v-container>
 </template>
 

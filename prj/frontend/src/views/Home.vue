@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <div>{{ constants.NumAPICalls.replace('{0}', user.callsMade) }}</div>
-    <div v-if="user.warning" class="text-caption, warning">{{ user.warning }}</div>
+    <div v-if="user.warning" class="text-caption text-red-lighten-1">{{ user.warning }}</div>
   </v-container>
-  <ImageUpload />
+  <ImageConvert />
 </template>
 
 
@@ -11,11 +11,11 @@
   import { computed } from '@vue/reactivity'
   import constants from '@/constants'
   import { useAppStore } from '@/store/app'
-  import ImageUpload from '@/components/ImageUpload.vue'
+  import ImageConvert from '@/components/ImageConvert.vue'
 
   export default {
     components: {
-      ImageUpload
+      ImageConvert
     },
     setup() {
       const appStore = useAppStore()
@@ -31,7 +31,3 @@
     },
   }
 </script>
-
-<style scoped>
-  @import '@/styles/styles.scss';
-</style>

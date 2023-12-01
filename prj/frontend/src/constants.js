@@ -13,6 +13,7 @@ const constants = {
   UploadImage: 'Upload image',
   AdminConsole: 'Admin Console',
   Analyse: 'Analyse',
+  Convert: 'Convert',
   Endpoint: 'Endpoint',
   RequestPswdReset: 'Request Password Reset',
   ResetPassword: 'Reset Password',
@@ -22,6 +23,8 @@ const constants = {
   NumRequests: 'Number of Requests',
   TotalNumRequests: 'Total Number of Requests',
   NumAPICalls: 'Number of API Calls: {0}',
+  ImageUrl: 'Image URL',
+  ConvertedText: 'The text in the image is: ',
   msg: {
     UsernameVal: 'You must enter a valid username',
     PasswordVal: 'You must enter a password',
@@ -33,6 +36,7 @@ const constants = {
     ResetPswdReqFail: 'Failed to send reset password request',
     ResetPswdSuccess: 'Password reset successfully',
     ResetPswdFail: 'Failed to reset password',
+    ConvertImgFail: 'Failed to convert image with Url: {0}',
   },
   action: {
     Close: 'CLOSE',
