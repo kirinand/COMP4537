@@ -17,7 +17,7 @@
         >
       </v-row>
     </v-col>
-    <v-col class="pa-0">
+    <v-col v-if="text" class="pa-0">
       <div>{{ constants.ConvertedText }}</div>
       <div>{{ text }}</div>
     </v-col>
