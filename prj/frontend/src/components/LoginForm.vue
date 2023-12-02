@@ -51,8 +51,13 @@
             password: this.password
           }, { withCredentials: true })
           .then(response => {
-            const data = response.data
-            setUser({ isLoggedIn: true, ...data })
+            const { role, calls_made, warning } = response.data
+            setUser({ 
+              isLoggedIn: true,
+              isAdmin: role === 'admin',
+              callsMade: calls_made,
+              warning: warning
+            })
             if (isAdmin) {
               this.$router.push('/admin')
             } else {
