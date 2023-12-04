@@ -1,6 +1,9 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAppStore } from '@/store/app'
+import axios from 'axios'
+import { API_URL } from '@/config'
+import { setUser } from '@/store/utils'
 
 const routes = [
   {
@@ -64,7 +67,21 @@ const router = createRouter({
 
 router.beforeEach((to, _, next) => {
   if (to.meta.requiresAuth && !useAppStore().user.isLoggedIn) {
-    next('/login')
+    axios.post(`${API_URL}/login`, {}, { withCredentials: true })
+    .then(response => {
+      const { role, calls_made, warning } = response.data
+      const isAdmin = role === 'admin'
+      setUser({ 
+        isLoggedIn: true,
+        isAdmin,
+        callsMade: calls_made,
+        warning
+      })
+      next()
+    })
+    .catch(() => {
+      next('/login')
+    })
   } else {
     next()
   }
