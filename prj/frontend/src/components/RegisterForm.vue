@@ -48,6 +48,7 @@
       ],
       passwordRules: [
         value => !!value || constants.msg.PasswordVal,
+        value => value.length >= 8 || constants.msg.PasswordMinVal,
       ]
     }),
 
