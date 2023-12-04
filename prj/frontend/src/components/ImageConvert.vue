@@ -17,7 +17,8 @@
         >
       </v-row>
     </v-col>
-    <v-col v-if="text" class="pa-0">
+    <Spinner v-if="loading"></Spinner>
+    <v-col v-else-if="text" class="pa-0">
       <div>{{ constants.ConvertedText }}</div>
       <div>{{ text }}</div>
     </v-col>
@@ -28,28 +29,43 @@
 import axios from "axios"
 import constants from "@/constants"
 import { API_URL } from "@/config"
+import Spinner from "@/components/Spinner.vue"
 
 export default {
+  components: {
+    Spinner,
+  },
   data: () => ({
     constants,
     imageUrl: "",
     text: "",
+    loading: false,
   }),
   methods: {
     async convertImage() {
       const imgUrl = this.imageUrl
+
+      if (!imgUrl) {
+        this.$root.vtoast.show(constants.msg.InvalidImgUrl)
+        return
+      }
+
+      this.loading = true
       axios.post(
         `${API_URL}/convert_handwritten`,
         { imgUrl },
         { withCredentials: true }
       )
       .then(response => {
-        // this.text = response.data.text
+        this.text = 'This is a test'
         console.log(response.data)
       })
       .catch(error => {
         this.$root.vtoast.show(constants.msg.ConvertImgFail.replace('{0}', imgUrl))
         console.log(error)
+      })
+      .finally(() => {
+        this.loading = false
       })
     },
   },

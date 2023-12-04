@@ -37,6 +37,7 @@ const constants = {
     ResetPswdSuccess: 'Password reset successfully',
     ResetPswdFail: 'Failed to reset password',
     ConvertImgFail: 'Failed to convert image with Url: {0}',
+    InvalidImgUrl: 'Please enter a valid image url',
   },
   action: {
     Close: 'CLOSE',
