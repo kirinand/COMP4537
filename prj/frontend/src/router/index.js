@@ -67,7 +67,10 @@ const router = createRouter({
 
 router.beforeEach((to, _, next) => {
   if (to.meta.requiresAuth && !useAppStore().user.isLoggedIn) {
-    axios.post(`${API_URL}/login`, {}, { withCredentials: true })
+    axios.post(`${API_URL}/login`, {
+      email: "",
+      password: ""
+    }, { withCredentials: true })
     .then(response => {
       const { role, calls_made, warning } = response.data
       const isAdmin = role === 'admin'
