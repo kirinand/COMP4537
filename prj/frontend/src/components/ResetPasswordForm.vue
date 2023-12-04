@@ -33,7 +33,7 @@
     methods: {
       async submitForm() {
         if (this.isFormValid) {
-          axios.post(`${API_URL}/reset_password`, {
+          axios.patch(`${API_URL}/reset_password`, {
             token: this.token,
             password: this.password
           })
