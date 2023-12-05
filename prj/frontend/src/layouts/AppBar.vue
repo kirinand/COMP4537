@@ -12,12 +12,12 @@
         {{ constants.AdminConsole }}
       </router-link>
     </v-btn>
-    <v-btn
+    <!-- <v-btn
       v-if="user.isLoggedIn"
       @click="console.log('logout')"
     >
       {{ constants.Logout }}
-    </v-btn>
+    </v-btn> -->
   </v-app-bar>
 </template>
 
