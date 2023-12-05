@@ -30,6 +30,7 @@ import axios from "axios"
 import constants from "@/constants"
 import { API_URL } from "@/config"
 import Spinner from "@/components/Spinner.vue"
+import { useAppStore } from '@/store/app'
 
 export default {
   components: {
@@ -57,7 +58,12 @@ export default {
         { withCredentials: true }
       )
       .then(response => {
-        this.text = 'This is a test'
+        const { text: { message } = {}, warning } = response.data
+        this.text = message
+        if (warning) {
+          useAppStore().setUser({ warning })
+          this.$root.vtoast.show(warning)
+        }
         console.log(response.data)
       })
       .catch(error => {
