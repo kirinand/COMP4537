@@ -41,7 +41,7 @@
             password: this.password
           })
           .then(response => {
-            this.$root.vtoast.show(constants.msg.ResetPswdReqSuccess)
+            this.$root.vtoast.show(constants.msg.ResetPswdSuccess)
             this.$router.push('/login')
             console.log(response.data)
           })
