@@ -23,6 +23,7 @@
   import axios from 'axios'
   import constants from '@/constants'
   import { API_URL } from '@/config'
+  import { useAppStore } from '@/store/app'
 
   export default {
     data: () => ({
@@ -42,6 +43,8 @@
     methods: {
       async submitForm() {
         if (this.isFormValid) {
+          const appStore = useAppStore()
+          appStore.setLoading(true)
           axios.post(`${API_URL}/forgot_password`, {
             username: this.username,
             email: this.email
@@ -54,6 +57,9 @@
           .catch(error => {
             this.$root.vtoast.show(constants.msg.ResetPswdReqFail, constants.action.Close)
             console.log(error)
+          })
+          .finally(() => {
+            appStore.setLoading(false)
           })
         }
       }

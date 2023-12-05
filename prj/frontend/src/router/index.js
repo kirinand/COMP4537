@@ -67,6 +67,8 @@ const router = createRouter({
 
 router.beforeEach((to, _, next) => {
   if (to.meta.requiresAuth && !useAppStore().user.isLoggedIn) {
+    const appStore = useAppStore()
+    appStore.setLoading(true)
     axios.post(`${API_URL}/login`, {
       email: "",
       password: ""
@@ -84,6 +86,9 @@ router.beforeEach((to, _, next) => {
     })
     .catch(() => {
       next('/login')
+    })
+    .finally(() => {
+      appStore.setLoading(false)
     })
   } else {
     next()

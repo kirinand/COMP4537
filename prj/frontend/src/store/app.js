@@ -8,7 +8,8 @@ export const useAppStore = defineStore('app', {
       isAdmin: false,
       callsMade: 0,
       warning: null,
-    }
+    },
+    loading: false,
   }),
   actions: {
     setUser(value) {
@@ -16,6 +17,9 @@ export const useAppStore = defineStore('app', {
         ...this.user,
         ...value,
       }
+    },
+    setLoading(value) {
+      this.loading = value
     },
   },
 })

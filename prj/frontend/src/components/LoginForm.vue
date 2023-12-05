@@ -27,6 +27,7 @@
   import { setUser } from '@/store/utils'
   import { API_URL } from '@/config'
   import axios from 'axios'
+  import { useAppStore } from '@/store/app'
 
   export default {
     data: () => ({
@@ -46,6 +47,8 @@
     methods: {
       async submitForm() {
         if (this.isFormValid) {
+          const appStore = useAppStore()
+          appStore.setLoading(true)
           axios.post(`${API_URL}/login`, {
             email: this.email,
             password: this.password
@@ -69,6 +72,9 @@
           .catch(error => {
             this.$root.vtoast.show(constants.msg.LoginFail)
             console.log(error)
+          })
+          .finally(() => {
+            appStore.setLoading(false)
           })
         }
       }

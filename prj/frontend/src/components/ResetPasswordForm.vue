@@ -17,6 +17,7 @@
   import axios from 'axios'
   import constants from '@/constants'
   import { API_URL } from '@/config'
+  import { useAppStore } from '@/store/app'
 
   export default {
     data: () => ({
@@ -32,6 +33,8 @@
 
     methods: {
       async submitForm() {
+        const appStore = useAppStore()
+        appStore.setLoading(true)
         if (this.isFormValid) {
           axios.patch(`${API_URL}/reset_password`, {
             token: this.token,
@@ -45,6 +48,9 @@
           .catch(error => {
             this.$root.vtoast.show(constants.msg.RegisterFail, constants.action.Close)
             console.log(error)
+          })
+          .finally(() => {
+            appStore.setLoading(false)
           })
         }
       }
